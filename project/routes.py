@@ -1,11 +1,11 @@
-from project import app
-from flask import render_template, request, redirect, request
+from flask import Flask, request, render_template
 from datetime import datetime
+from project import app
 from project.models import User, Task
 
 
 # Rota página principal do programa
-@app.get("/", METHODS=['GET', 'POST'])
+@app.route("/", methods = ['POST', 'GET'])
 def index():
     if request.method == 'POST':
         task_title = request.form['idAddTaskTitle']
@@ -19,8 +19,3 @@ def index():
 @app.route("/tasks")
 def tasks():
     return render_template('tarefas.html')
-
-
-@app.post("/create_task")
-def create_task():
-    
