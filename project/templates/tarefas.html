@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Tarefas
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+{% block script %}
+<script>
+    function onLoad(){
+        document.getElementById("idNavTarefas").className = "nav-link text-white active fs-5";
+        document.getElementById("idNavTarefas").href = "";
+    }
+    window.onload = onload;
+</script>
+{% endblock %}
