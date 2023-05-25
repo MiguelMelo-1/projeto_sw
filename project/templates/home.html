@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block content %}
-    <div style="margin-left: 18%; margin-right: 18%; margin-top: 3%;">
-        <form action="{{ url_for('index') }}" class="form-control">
+    <div style="margin-left: 10%; margin-right: 10%; margin-top: 10%;">
+        <form action="{{ url_for('index') }}" class="form-control" method="post">
             <fieldset>
-                <legend class="text-center pb-4">Tarefa</legend>
+                <legend class="text-center pb-2 fs-1">Tarefa</legend>
                 <hr>
-                <div class="py-3">
-                    <div class="input-group mb-3">
+                <div class="py-4">
+                    <div class="input-group mb-3 p-2">
                         <span class="input-group-text">Titulo da Tarefa</span>
                         <input type="text" class="form-control" id="idAddTaskTitle">
                     </div>
-                    <div class="row gx-5">
+                    <div class="row gx-5 p-2">
                         <div class="input-group mb-3 col">
                             <span class="input-group-text">Data de Inicio</span>
                             <input type="date" id="idAddTaskDateStart" class="form-control" value="{{ dia.strftime('%Y-%m-%d') }}">
@@ -25,7 +25,7 @@
                             <input type="date" id="idAddTaskDateEnd" class="form-control">
                         </div>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group p-2">
                         <span class="input-group-text">Descrição</span>
                         <textarea id="idAddTaskDescription" class="form-control" style="resize: none;"></textarea>
                     </div>

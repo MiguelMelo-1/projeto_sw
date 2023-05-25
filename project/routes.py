@@ -12,10 +12,22 @@ def index():
         task_description = request.form['idAddTaskDescription']
         task_date_start = request.form['idAddTaskDateStart']
         task_date_end = request.form['idAddTaskDateEnd']
+
+        new_task = Task(
+            title = task_title,
+            desc = task_description,
+            date_start = task_date_start,
+            date_end = task_date_end
+            )
     else:
         dia = datetime.now()
         return render_template('home.html', dia=dia)
 
+@app.route("/login", methods = ["GET", "POST"])
+def login():
+    return render_template("login.html")
+
 @app.route("/tasks")
 def tasks():
     return render_template('tarefas.html')
+
