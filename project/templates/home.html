@@ -22,7 +22,7 @@
                         </div>
                         <div class="input-group mb-3 col">
                             <span class="input-group-text">Prazo Final</span>
-                            <input type="date" id="idAddTaskDateEnd" class="form-control">
+                            <input type="date" id="idAddTaskDateEnd" class="form-control" min="{{ dia.strftime('%Y-%m-%d') }}">
                         </div>
                     </div>
                     <div class="input-group p-2">
