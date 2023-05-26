@@ -5,7 +5,7 @@ from project.models import User, Task
 
 
 # Rota página principal do programa
-@app.route("/", methods = ['POST', 'GET'])
+@app.route("/index", methods = ['POST', 'GET'])
 def index():
     if request.method == 'POST':
         task_title = request.form['idAddTaskTitle']
@@ -23,7 +23,7 @@ def index():
         dia = datetime.now()
         return render_template('home.html', dia=dia)
 
-@app.route("/login", methods = ["GET", "POST"])
+@app.route("/", methods = ["GET", "POST"])
 def login():
     return render_template("login.html")
 
