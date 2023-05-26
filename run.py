@@ -4,4 +4,3 @@ from project import app
 if __name__ == '__main__':
     # Ativa o debugger
     app.run(debug = True)
-    ola
