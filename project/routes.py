@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from datetime import datetime
 from project import app
 from project.models import User, Task
@@ -19,6 +19,8 @@ def index():
             date_start = task_date_start,
             date_end = task_date_end
             )
+        
+        return redirect('index')
     else:
         dia = datetime.now()
         return render_template('home.html', dia=dia)
