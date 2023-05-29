@@ -19,7 +19,6 @@ def index():
             date_start = task_date_start,
             date_end = task_date_end
             )
-        
         return redirect('index')
     else:
         dia = datetime.now()

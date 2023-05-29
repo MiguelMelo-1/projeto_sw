@@ -29,4 +29,4 @@ class Task(db.Model):
     state = db.Column(db.Boolean(), default=False)
     date_start = db.Column(db.String(), default=date_time.strftime("%Y-%m-%d"))
     date_end = db.Column(db.String())
-    id_user = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False, )
+    id_user = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=True)
