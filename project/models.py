@@ -1,9 +1,6 @@
 from project import db
 from datetime import datetime
-from project import bcrypt 
-
-
-
+from project import bcrypt
 
 class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
