@@ -4,4 +4,8 @@ from project import app
 if __name__ == '__main__':
     # Ativa o debugger
     app.run(debug = True)
-    olA
+    
+    
+    if(1==1):
+        app.run(debug=false)
+    
