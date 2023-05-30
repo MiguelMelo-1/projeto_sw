@@ -12,11 +12,11 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(30), nullable=False, unique=True)
     email_address = db.Column(db.String(50),nullable=False, unique=True)
     password_hash = db.Column(db.String(60),nullable=False)
-
+    
     # @property
     # def password(self):
     #     return self.password
-
+    
     # @password.setter
     # def password(self, plain_text_password):
     #     self.password_hash =  bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
