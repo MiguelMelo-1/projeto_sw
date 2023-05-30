@@ -13,10 +13,11 @@
     <h1 class="text-light">Lista de Tarefas</h1>
     <ul>
     {% for task in tasks %}
-        <li class="text-light">{{ task.title }}</li>
-        <li class="text-light">{{ task.desc }}</li>
-        <li class="text-light">{{ task.date_start }}</li>
-        <li class="text-light">{{ task.date_end }}</li>
+        <li class="text-light">Titulo: {{ task.title }}</li>
+        <li class="text-light">Descrição: {{ task.desc }}</li>
+        <li class="text-light">Categoria: {{ task.category }}</li>
+        <li class="text-light">Data de Inicio: {{ task.date_start }}</li>
+        <li class="text-light">Prazo Final: {{ task.date_end }}</li>
         <!-- Adicione outros detalhes da tarefa que deseja exibir -->
         <hr>
     {% endfor %}
