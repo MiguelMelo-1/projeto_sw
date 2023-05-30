@@ -16,7 +16,14 @@ class RegistrationForm(FlaskForm):
     ])
     submit = SubmitField('Registrar')
 
+<<<<<<< Updated upstream
 class LoginForm(FlaskForm):
+=======
+
+
+
+class LoginForm(FlaskForm):
+>>>>>>> Stashed changes
     username = StringField('Nome de utilizador', validators=[
         DataRequired(),
         Length(min=2, max=20)
