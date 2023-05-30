@@ -1,0 +1,40 @@
+{%extends './layout/base_login.html'%}
+
+{% block title %}
+<title>Registrar - Taks</title>
+{% endblock %}
+
+{% block content %}
+    <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
+        <form action="" class="form-control" method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <legend class="text-center pb-4">Registrar</legend>
+                <hr>
+                <div class="py-3">
+                    <div class="form-group">
+                        {{ form.username.label(class="form-control-label") }}
+                        {{ form.username(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(class="form-control-label") }}
+                        {{ form.password(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.confirm_password.label(class="form-control-label") }}
+                        {{ form.confirm_password(class="form-control") }}
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    {{ form.submit(class="btn btn-outline-success") }}
+                </div>
+            </fieldset>
+            <div class="pt-3 text-center">
+                <small class="text-muted">
+                    Já tem conta? <a href="{{ url_for('login') }}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover ml-2">Login</a>
+                </small>
+            </div>
+        </form>
+    </div>
+{% endblock %}
