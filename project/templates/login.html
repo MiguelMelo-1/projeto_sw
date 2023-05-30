@@ -24,24 +24,36 @@
                         {% else %}
                             {{ form.username(class="form-control") }}
                         {% endif %}
-                        <span class="input-group-text">Nome de utilizador</span>
-                        <input type="text" class="form-control" id="idLoginUsername">
                     </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">Password</span>
-                        <input type="password" class="form-control" id="idLoginPassword">
+                    <div class="form-group mt-1">
+                        {{ form.password.label(class="form-control-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div class="form-check mt-3">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
                     </div>
                 </div>
                 <hr>
                 <div class="text-center">
-                    <input type="submit" value="Login" class="btn btn-outline-success m-2">
+                    {{ form.submit(class="btn btn-outline-success") }}
                     <a href="{{ url_for('register') }}" class="btn btn-outline-primary m-2" role="button">Registrar</a>
                 </div>
             </fieldset>
+            <small class="text-muted ml2-2 text-center"><a href="#">Forgot Password?</a></small>
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {%  if messages %}
                     {% for categoria, mensagem in messages %}
-                        <div class="alert alert-{{ categoria }}">
+                        <div class="alert alert-{{ categoria }} mt-3">
                             <p>{{ mensagem }}</p>
                         </div>
                     {% endfor %}

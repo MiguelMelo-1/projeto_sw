@@ -17,7 +17,6 @@ class User(db.Model):
     #     self.password_hash =  bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
 
-
 class Task(db.Model):
     date_time = datetime.now()
     id = db.Column(db.Integer(), primary_key=True)
