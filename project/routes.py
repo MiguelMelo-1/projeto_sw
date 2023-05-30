@@ -41,6 +41,7 @@ def login():
 
 @app.route("/tasks")
 def tasks():
-    return render_template('tarefas.html')
+    all_tasks = Task.query.all()
+    return render_template('tarefas.html', tasks=all_tasks)
 
 
