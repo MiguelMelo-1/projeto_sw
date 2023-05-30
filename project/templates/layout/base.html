@@ -13,16 +13,6 @@
 
 <body class="bg-dark" onload="onLoad()">
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {%  if messages %}
-            {% for category, messsage in messages %}
-                <div class="alert alert-{{ category }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
     <!-- content -->
     {% block content %}
     {% endblock %}

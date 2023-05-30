@@ -8,11 +8,11 @@ class RegistrationForm(FlaskForm):
         Length(min=2, max=20)
     ])
     password = PasswordField('Password', validators=[
-        DataRequired(),
+        DataRequired()
     ])
     confirm_password = PasswordField('Confirmar Password', validators=[
         DataRequired(),
-        EqualTo('Password')
+        EqualTo('password')
     ])
     submit = SubmitField('Registrar')
 

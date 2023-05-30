@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+    
+
     <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
         <form action="{{ url_for('index') }}" class="form-control" method="get">
             <fieldset>
@@ -26,6 +28,15 @@
                     <a href="{{ url_for('register') }}" class="btn btn-outline-primary m-2" role="button">Registrar</a>
                 </div>
             </fieldset>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {%  if messages %}
+                    {% for categoria, mensagem in messages %}
+                        <div class="alert alert-{{ categoria }}">
+                            <p>{{ mensagem }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </form>
     </div>
 {% endblock %}

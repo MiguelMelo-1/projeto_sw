@@ -30,7 +30,7 @@ def index():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Conta criada para {form.username.data}!', 'success')
+        flash('Conta criada com sucesso', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
