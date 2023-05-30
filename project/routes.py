@@ -3,8 +3,6 @@ from datetime import datetime
 from project import app, db, bcrypt
 from project.models import User, Task
 from project.forms import RegistrationForm, LoginForm
-from project import db
-
 
 # Rota página principal do programa
 @app.route("/index", methods = ['POST', 'GET'])

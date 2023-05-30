@@ -1,6 +1,9 @@
-from project import db
+from project import db, login_manager
 from datetime import datetime
-from project import bcrypt
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 class User(db.Model):
     id = db.Column(db.Integer(), primary_key=True)
