@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, flash, url_for
 from datetime import datetime
 from project import app
 from project.models import User, Task
@@ -26,18 +26,18 @@ def index():
         dia = datetime.now()
         return render_template('home.html', dia=dia)
 
-@app.route("/register")
+@app.route("/register", methods = ["GET", "POST"])
 def register():
     form = RegistrationForm()
-    return render_template('register.html',title='Register',form=form)
-
-
-
+    if form.validate_on_submit():
+        flash(f'Conta criada para {form.username.data}!', 'success')
+        return redirect(url_for('login'))
+    return render_template('register.html', form=form)
 
 @app.route("/", methods = ["GET", "POST"])
 def login():
     form = LoginForm()
-    return render_template('login.html', title='Login',fomr=form)
+    return render_template('login.html', form=form)
 
 @app.route("/tasks")
 def tasks():

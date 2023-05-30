@@ -1,4 +1,4 @@
-{%extends './layout/base_login.html'%}
+{% extends './layout/base.html' %}
 
 {% block title %}
 <title>Registrar - Taks</title>
@@ -6,7 +6,7 @@
 
 {% block content %}
     <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
-        <form action="" class="form-control" method="POST">
+        <form action="{{ url_for('register') }}" class="form-control" method="POST">
             {{ form.hidden_tag() }}
             <fieldset>
                 <legend class="text-center pb-4">Registrar</legend>
