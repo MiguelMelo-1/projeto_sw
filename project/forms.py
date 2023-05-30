@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Length, EqualTo, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, EqualTo
 
-class RegistrationForm(FlaskFrom):
+class RegistrationForm(FlaskForm):
     username = StringField('Nome de utilizador', validators=[
         DataRequired(),
         Length(min=2, max=20)
@@ -16,7 +16,7 @@ class RegistrationForm(FlaskFrom):
     ])
     submit = SubmitField('Registrar')
 
-class LoginForm(FlaskFrom):
+class LoginForm(FlaskForm):
     username = StringField('Nome de utilizador', validators=[
         DataRequired(),
         Length(min=2, max=20)

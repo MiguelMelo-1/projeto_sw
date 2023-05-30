@@ -1,11 +1,11 @@
 from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from forms import RegistrationForm, LoginForm
+from project.forms import RegistrationForm, LoginForm
 
-app.config['SECRET_KEY'] = 'e6e7367df57e95a4788360c842521e3e'
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'e6e7367df57e95a4788360c842521e3e'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todos.db'
 
 db = SQLAlchemy(app)
