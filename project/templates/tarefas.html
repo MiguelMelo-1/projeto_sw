@@ -4,23 +4,23 @@
     Tarefas
 {% endblock %}
 
-{% block content %}
 <!-- Navigation bar -->
 {% include 'includes/navbar.html' %}
 <!-- end navigation bar -->
+{% block content %}
 
 <div class="container">
-  <h1>Lista de Tarefas</h1>
-  <ul>
-      {% for task in tasks %}
-          <li>{{ task.title }}</li>
-          <li>{{ task.desc }}</li>
-          <li>{{ task.date_start }}</li>
-          <li>{{ task.date_end }}</li>
-          <!-- Adicione outros detalhes da tarefa que deseja exibir -->
-          <hr>
-      {% endfor %}
-  </ul>
+    <h1 class="text-light">Lista de Tarefas</h1>
+    <ul>
+    {% for task in tasks %}
+        <li class="text-light">{{ task.title }}</li>
+        <li class="text-light">{{ task.desc }}</li>
+        <li class="text-light">{{ task.date_start }}</li>
+        <li class="text-light">{{ task.date_end }}</li>
+        <!-- Adicione outros detalhes da tarefa que deseja exibir -->
+        <hr>
+    {% endfor %}
+    </ul>
 </div>
 {% endblock %}
 

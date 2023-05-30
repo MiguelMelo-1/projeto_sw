@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-    
 
     <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
         <form action="{{ url_for('index') }}" class="form-control" method="get">
@@ -13,7 +12,18 @@
                 <legend class="text-center pb-4">Login</legend>
                 <hr>
                 <div class="py-3">
-                    <div class="input-group mb-3">
+                    <div class="form-group">
+                        {{ form.username.label(class="form-control-label") }}
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control") }}
+                        {% endif %}
                         <span class="input-group-text">Nome de utilizador</span>
                         <input type="text" class="form-control" id="idLoginUsername">
                     </div>
