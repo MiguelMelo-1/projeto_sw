@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect
 from datetime import datetime
 from project import app
 from project.models import User, Task
+from project.forms import RegistrationForm, LoginForm 
 
 
 # Rota página principal do programa
@@ -24,11 +25,18 @@ def index():
         dia = datetime.now()
         return render_template('home.html', dia=dia)
 
-@app.route("/", methods = ["GET", "POST"])
+@app.route("/register")
+def register():
+    form = RegistrationForm()
+    return render_template('register.html',title='Register',form=form)
+
+@app.route("/")
 def login():
-    return render_template("login.html")
+    form = LoginForm()
+    return render_template('login.html', title='Login',fomr=form)
 
 @app.route("/tasks")
 def tasks():
     return render_template('tarefas.html')
+
 
