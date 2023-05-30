@@ -3,7 +3,7 @@ from datetime import datetime
 from project import app
 from project.models import User, Task
 from project.forms import RegistrationForm, LoginForm
-
+from project import db
 
 
 # Rota página principal do programa
@@ -14,13 +14,18 @@ def index():
         task_description = request.form['idAddTaskDescription']
         task_date_start = request.form['idAddTaskDateStart']
         task_date_end = request.form['idAddTaskDateEnd']
+        task_categoria = request.form['idAddCategoria']
 
         new_task = Task(
             title = task_title,
             desc = task_description,
+            category = task_categoria,
             date_start = task_date_start,
             date_end = task_date_end
+            
             )
+        db.session.add(new_task)
+        db.session.commit()
         return redirect('index')
     else:
         dia = datetime.now()
