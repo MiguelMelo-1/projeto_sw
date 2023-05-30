@@ -3,6 +3,7 @@ from datetime import datetime
 from project import app, db, bcrypt
 from project.models import User, Task
 from project.forms import RegistrationForm, LoginForm
+from flask_login import login_user, current_user, logout_user
 
 # Rota página principal do programa
 @app.route("/index", methods = ['POST', 'GET'])
@@ -24,12 +25,13 @@ def index():
         db.session.add(new_task)
         db.session.commit()
         return redirect('index')
-    else:
-        dia = datetime.now()
-        return render_template('home.html', dia=dia)
+    dia = datetime.now()
+    return render_template('home.html', dia=dia)
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
+    if current_user.is_authenticated():
+        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -42,18 +44,25 @@ def register():
 
 @app.route("/", methods = ["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        if form.username.data == '' and form.password.data=='':
-            flash('Login com sucesso', 'success')
-            return redirect(url_for('index'))
+        user = User.query.filter_by(username = form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
+            login_user(user, remember = form.remember.data)
+            return redirect(url_for('index'), code=302)
         else:
-            flash('Login sem sucesso, verifique o username e password', 'danger')
+            flash('Login sem sucesso, verifique o utilizador e password', 'danger')
     return render_template('login.html', form=form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 
 @app.route("/tasks")
 def tasks():
     all_tasks = Task.query.all()
     return render_template('tarefas.html', tasks=all_tasks)
-
-
