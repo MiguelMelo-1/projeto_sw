@@ -26,9 +26,8 @@
     {% endfor %}
     </ul>
 </div>
-
+{{ tasks }}
 <div id="tabela-tasks">
-
 </div>
 {% endblock %}
 
@@ -36,7 +35,17 @@
 <script type="text/javascript" src="url_for('static', filename='tabulator-master/dist/js/tabulator.min.js')"></script>
 
 <script>
-    var table = new Tabulator("#tabela-tasks", {});
+    import {TabulatorFull as Tabulator} from 'tabulator-tables';
+    var table = new Tabulator("#tabela-tasks", {
+        data:"{{ tasks }}",
+        autoColumns:true,
+        columns:[
+            {title:"#", field:"id", sorter:"number"},
+            {title:"Titulo", field:"title", sorter:"string", hozAlign:"center"},
+            {title:"Categoria", field:"category", sorter:"string", hozAlign:"center"},
+            {title:"estado", field:"state", sorter:"string", hozAlign:"center"}
+        ],
+    });
 </script>
 
 <script>
