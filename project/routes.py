@@ -14,13 +14,15 @@ def index():
         task_date_start = request.form['idAddTaskDateStart']
         task_date_end = request.form['idAddTaskDateEnd']
         task_categoria = request.form['idAddCategoria']
+        user_id = current_user.id
 
         new_task = Task(
             title = task_title,
             desc = task_description,
             category = task_categoria,
             date_start = task_date_start,
-            date_end = task_date_end
+            date_end = task_date_end,
+            id_user = user_id
             )
         db.session.add(new_task)
         db.session.commit()
@@ -35,7 +37,11 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username = form.username.data, email_address=form.email.data, password_hash=hashed_password)
+        user = User(
+            username = form.username.data,
+            email_address=form.email.data,
+            password_hash=hashed_password
+        )
         db.session.add(user)
         db.session.commit()
         flash('Conta criada com sucesso', 'success')
@@ -51,7 +57,7 @@ def login():
         user = User.query.filter_by(username = form.username.data).first()
         if user and bcrypt.check_password_hash(user.password_hash, form.password.data):
             login_user(user, remember = form.remember.data)
-            return redirect(url_for('index'), code=302)
+            return redirect('index')
         else:
             flash('Login sem sucesso, verifique o utilizador e password', 'danger')
     return render_template('login.html', form=form)
@@ -59,9 +65,9 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route("/tasks")
 def tasks():
-    all_tasks = Task.query.all()
-    return render_template('tarefas.html', tasks=all_tasks)
+    tasks = Task.query.filter_by(id_user = current_user.id).all()
+    return render_template('tarefas.html', tasks=tasks)

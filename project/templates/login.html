@@ -6,8 +6,17 @@
 
 {% block content %}
 
+{% if form.errors %}
+        <ul class="errors">
+            {% for error in form.errors %}
+                <li class="text-light">{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
         <form action="{{ url_for('login') }}" class="form-control" method="POST">
+            {{ form.hidden_tag() }}
             <fieldset>
                 <legend class="text-center pb-4">Login</legend>
                 <hr>
