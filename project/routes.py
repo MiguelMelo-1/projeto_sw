@@ -30,7 +30,7 @@ def index():
 
 @app.route("/register", methods = ["GET", "POST"])
 def register():
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -60,7 +60,6 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-
 
 @app.route("/tasks")
 def tasks():
