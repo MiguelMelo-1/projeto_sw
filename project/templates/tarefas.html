@@ -1,55 +1,74 @@
 {% extends './layout/base.html' %}
 
 {% block link %}
-<link href="{{ url_for('static', filename='tabulator-master/dist/css/tabulator.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='tabulator-master/dist/css/tabulator.min.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
-    Tarefas
+<title>Tarefas</title>
 {% endblock %}
 
+{% block navbar %}
 <!-- Navigation bar -->
 {% include 'includes/navbar.html' %}
 <!-- end navigation bar -->
-{% block content %}
+{% endblock %}
 
+{% block content %}
+<!-- content -->
 <div class="container">
     <h1 class="text-light">Lista de Tarefas</h1>
     <ul>
-    {% for task in tasks %}
+        {% for task in tasks %}
         <li class="text-light">Titulo: {{ task.title }}</li>
         <li class="text-light">Descrição: {{ task.desc }}</li>
         <li class="text-light">Categoria: {{ task.category }}</li>
         <li class="text-light">Data de Inicio: {{ task.date_start }}</li>
         <li class="text-light">Prazo Final: {{ task.date_end }}</li>
         <hr>
-    {% endfor %}
+        {% endfor %}
     </ul>
 </div>
-{{ tasks }}
-<div id="tabela-tasks">
-</div>
+<div id="tabela-tasks"></div>
+<div id="example-table"></div>
+<!-- end content -->
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" src="url_for('static', filename='tabulator-master/dist/js/tabulator.min.js')"></script>
+<script type="text/javascript"src="{{ url_for('static', filename='tabulator-master/dist/js/tabulator.min.js') }}"></script>
 
-<script>
-    import {TabulatorFull as Tabulator} from 'tabulator-tables';
-    var table = new Tabulator("#tabela-tasks", {
-        data:"{{ tasks }}",
-        autoColumns:true,
+<script type="text/javascript">
+    var table = new Tabulator("#example-table", {
+        height:"311px",
         columns:[
-            {title:"#", field:"id", sorter:"number"},
-            {title:"Titulo", field:"title", sorter:"string", hozAlign:"center"},
-            {title:"Categoria", field:"category", sorter:"string", hozAlign:"center"},
-            {title:"estado", field:"state", sorter:"string", hozAlign:"center"}
+        {title:"Name", field:"name", width:250, frozen:true}, //frozen column
+        {title:"Progress", field:"progress", sorter:"number", hozAlign:"left", formatter:"progress", width:200,  editable:true},
+        {title:"Gender", field:"gender", width:150},
+        {title:"Rating", field:"rating",  formatter:"star", hozAlign:"center", width:200},
+        {title:"Date Of Birth", field:"dob", hozAlign:"center", sorter:"date"},
+        {title:"Driver", field:"car", hozAlign:"center", formatter:"tickCross", width:150},
         ],
+    });
+
+    let teste = [id = 1, title = "teste", category = "teste", state = "por concluir"]
+
+    let table = new Tabulator("#tabela-tasks", {
+        data: teste,
+        autoColumns: true,
+        columns: [
+            { title: "#", field: "id", sorter: "number" },
+            { title: "Titulo", field: "title", sorter: "string", hozAlign: "center" },
+            { title: "Categoria", field: "category", sorter: "string", hozAlign: "center" },
+            { title: "estado", field: "state", sorter: "string", hozAlign: "center" }
+        ],
+    });
+    table.on("tableBuilt", () => {
+        table.setPage(2);
     });
 </script>
 
-<script>
-    function onLoad(){
+<script type="text/javascript">
+    function onLoad() {
         document.getElementById("idNavTarefas").className = "nav-link text-white active fs-5";
         document.getElementById("idNavTarefas").href = "";
     }

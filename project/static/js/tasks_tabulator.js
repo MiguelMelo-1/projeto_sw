@@ -1,0 +1,1 @@
+import {Tabulator} from 'tabulator-tables';
