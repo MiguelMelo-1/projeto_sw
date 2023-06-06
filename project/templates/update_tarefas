@@ -1,0 +1,49 @@
+{% extends './layout/base.html' %}
+
+{% block title %}
+    <title>Editar Tarefa</title>
+{% endblock %}
+
+
+
+<!-- Navigation bar -->
+{% include 'includes/navbar.html' %}
+<!-- end navigation bar -->
+{% block content %}
+    <div style="margin-left: 10%; margin-right: 10%; margin-top: 10%;">
+        <form action="{{ url_for('task') }}" class="form-control" method="post">
+            <fieldset>
+                <legend class="text-center pb-2 fs-1">Tarefa</legend>
+                <hr>
+                <div class="py-4">
+                    <div class="input-group mb-3 p-2">
+                        <span class="input-group-text">Titulo da Tarefa</span>
+                        <input type="text" class="form-control" id="idAddTaskTitle" name="idAddTaskTitle">
+                    </div>
+                    <div class="input-group mb-3 p-2">
+                        <span class="input-group-text">Categoria</span>
+                        <input type="text" class="form-control" id="idAddCategoria" name="idAddCategoria">
+                    </div>
+                    <div class="row gx-5 p-2">
+                        <div class="input-group mb-3 col">
+                            <span class="input-group-text">Data de Inicio</span>
+                            <input type="date" id="idAddTaskDateStart" class="form-control" value="{{ dia.strftime('%Y-%m-%d') }}" name="idAddTaskDateStart">
+                        </div>
+                        <div class="input-group mb-3 col">
+                            <span class="input-group-text">Prazo Final</span>
+                            <input type="date" id="idAddTaskDateEnd" class="form-control" min="{{ dia.strftime('%Y-%m-%d') }}" name="idAddTaskDateEnd">
+                        </div>
+                    </div>
+                    <div class="input-group p-2">
+                        <span class="input-group-text">Descrição</span>
+                        <textarea id="idAddTaskDescription" class="form-control" style="resize: none;" name="idAddTaskDescription"></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <input type="submit" value="Adicionar tarefa" class="btn btn-outline-primary m-2">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
