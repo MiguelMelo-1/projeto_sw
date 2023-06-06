@@ -19,6 +19,11 @@
     <!-- Barra de pesquisa -->
     <div class="input-group mb-3">
         <input id="searchInput" type="text" class="form-control" placeholder="...">
+        <select id="searchField" class="form-select">
+            <option value="title">Título</option>
+            <option value="desc">Descrição</option>
+            <option value="category">Categoria</option>
+        </select>
         <button id="searchButton" class="btn btn-primary">Pesquisar</button>
     </div>
 
@@ -55,7 +60,7 @@
                                 <a href="#" class="flex btn btn-info" style="margin-right: 10px;">
                                     <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
                                 </a>
-                                <a href="#" class="flex btn btn-danger">
+                                <a href="{{ url_for('remove_task', task_id=task.id) }}" class="flex btn btn-danger">
                                     <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Remover
                                 </a>
                             </td>
@@ -87,9 +92,10 @@
         filter = input.value.toUpperCase();
         table = document.querySelector("table");
         tr = table.getElementsByTagName("tr");
-
+        var field = document.getElementById("searchField").value;
+    
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
+            td = tr[i].querySelectorAll("td")[getIndexByField(field)];
             if (td) {
                 txtValue = td.textContent || td.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -100,7 +106,20 @@
             }
         }
     }
-
+    
+    function getIndexByField(field) {
+        switch (field) {
+            case "title":
+                return 0;
+            case "desc":
+                return 1;
+            case "category":
+                return 2;
+            default:
+                return 0;
+        }
+    }
+    
     function onLoad() {
 
         document.getElementById("searchButton").addEventListener("click", filterTable);

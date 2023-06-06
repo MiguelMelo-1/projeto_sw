@@ -79,4 +79,12 @@ def task_done(task_id):
     db.session.commit()
     return redirect(url_for('tasks'))
 
+@app.route("/remove_task/<task_id>")
+def remove_task(task_id):
+    tasks = Task.query.get(task_id)
+    if tasks:
+        db.session.delete(tasks)
+        db.session.commit()
+    return redirect(url_for('tasks'))
+
 # //TODO: Adicionar o update tasks e o remove task bem como o respetivo html e o module
