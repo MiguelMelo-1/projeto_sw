@@ -56,11 +56,27 @@
                                 <a href="#" class="flex btn btn-info" style="margin-right: 10px;">
                                     <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
                                 </a>
-                                <a href="{{ url_for('remove_task', task_id=task.id) }}" class="flex btn btn-danger">
+                                <a class="flex btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ task.id }}">
                                     <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Remover
                                 </a>
                             </td>
                         </tr>
+                        <div class="modal fade" id="staticBackdrop_{{ task.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop_{{ task.id }}Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="text-center pt-2 mb-2">
+                                <h1 class="modal-title" id="staticBackdrop_{{ task.id }}Label"><i class="fa-solid fa-triangle-exclamation fa-xl" style="color: #ff0000;"></i></h1>
+                              </div>
+                              <div class="modal-body">
+                                Tem a certeza que deseja apagar a tarefa Nº{{ loop.index }}?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <a href="{{ url_for('remove_task', task_id=task.id) }}" class="btn btn-danger"><i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Apagar</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                     {% endfor %}
                 </tbody>
               </table>
