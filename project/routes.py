@@ -71,3 +71,12 @@ def logout():
 def tasks():
     tasks = Task.query.filter_by(id_user = current_user.id).all()
     return render_template('tarefas.html', tasks=tasks)
+
+@app.route("/task_done/<task_id>")
+def task_done(task_id):
+    task_done = Task.query.filter_by(id = task_id).first()
+    task_done.state = True
+    db.session.commit()
+    return redirect(url_for('tasks'))
+
+# //TODO: Adicionar o update tasks e o remove task bem como o respetivo html e o module

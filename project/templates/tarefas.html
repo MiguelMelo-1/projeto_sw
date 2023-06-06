@@ -12,26 +12,59 @@
 
 {% block content %}
 <!-- content -->
-<div class="container">
+<div class="container mt-5">
     <h1 class="text-light">Lista de Tarefas</h1>
-    <ul>
-        {% for task in tasks %}
-        <li class="text-light">Titulo: {{ task.title }}</li>
-        <li class="text-light">Descrição: {{ task.desc }}</li>
-        <li class="text-light">Categoria: {{ task.category }}</li>
-        <li class="text-light">Data de Inicio: {{ task.date_start }}</li>
-        <li class="text-light">Prazo Final: {{ task.date_end }}</li>
-        <hr>
-        {% endfor %}
-    </ul>
+    <table class="table table-light table-striped mt-5 text-center">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Data de Inicio</th>
+            <th scope="col">Prazo final</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% set temp = 0 %}
+            {% for task in tasks %}
+            {% set temp = temp + 1 %}
+                <tr>
+                    <th scope="row">{{ temp }}</th>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.desc }}</td>
+                    <td>{{ task.category }}</td>
+                    <td>{{ task.date_start }}</td>
+                    <td>{{ task.date_end }}</td>
+                    <td  style="right: 0%;">
+                        <a href="{{ url_for('task_done', task_id=task.id) }}" class="flex btn btn-success" style="margin-right: 10px;">
+                            <i class="fa-solid fa-check" style="margin-right: 5px;"></i>Concluido
+                        </a>
+                        <a href="#" class="flex btn btn-info" style="margin-right: 10px;">
+                            <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
+                        </a>
+                        <a href="#" class="flex btn btn-danger">
+                            <i class="fa-solid fa-trash" style="margin-right: 5px;"></i>Remover
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
 </div>
+
+
+
 <div id="tabela-tasks" class="bg-light mt-5"></div>
 <div id="example-table"></div>
 <!-- end content -->
 {% endblock %}
 
-{% block script %}
 
+
+
+{% block script %}
 <script>
     function onLoad() {
         document.getElementById("idNavTarefas").className = "nav-link text-white active fs-5";
