@@ -90,5 +90,5 @@ def remove_task(task_id):
 @app.route("/update_task/<task_id>")
 def update_task(task_id):
     tasks = Task.query.filter_by(id = task_id).first()
-    return render_template('update_tarefas.html', tasks = tasks)
-# //TODO: Adicionar o update tasks e o remove task bem como o respetivo html e o module
+    return render_template('update_tarefas.html', tasks = tasks, id_task = task_id)
+    # //TODO: Adicionar o update tasks e o remove task bem como o respetivo html e o module
