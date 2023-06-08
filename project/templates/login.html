@@ -5,69 +5,60 @@
 {% endblock %}
 
 {% block content %}
-
-{% if form.errors %}
-        <ul class="errors">
-            {% for error in form.errors %}
-                <li class="text-light">{{ error }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
-        <form action="{{ url_for('login') }}" class="form-control" method="POST">
-            {{ form.hidden_tag() }}
-            <fieldset>
-                <legend class="text-center pb-4">Login</legend>
-                <hr>
-                <div class="py-3">
-                    <div class="form-group">
-                        {{ form.username.label(class="form-control-label") }}
-                        {% if form.username.errors %}
-                            {{ form.username(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.username.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.username(class="form-control") }}
-                        {% endif %}
+<div style="margin-left: 30%; margin-right: 30%; margin-top: 15%;">
+    <form action="{{ url_for('login') }}" class="form-control" method="POST">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <legend class="text-center pb-4">Login</legend>
+            <hr>
+            <div class="py-3">
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+                    {% if form.username.errors %}
+                    {{ form.username(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
                     </div>
-                    <div class="form-group mt-1">
-                        {{ form.password.label(class="form-control-label") }}
-                        {% if form.password.errors %}
-                            {{ form.password(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.password.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.password(class="form-control") }}
-                        {% endif %}
-                    </div>
-                    <div class="form-check mt-3">
-                        {{ form.remember(class="form-check-input") }}
-                        {{ form.remember.label(class="form-check-label") }}
-                    </div>
+                    {% else %}
+                    {{ form.username(class="form-control") }}
+                    {% endif %}
                 </div>
-                <hr>
-                <div class="text-center">
-                    {{ form.submit(class="btn btn-outline-success") }}
-                    <a href="{{ url_for('register') }}" class="btn btn-outline-primary m-2" role="button">Registrar</a>
+                <div class="form-group mt-1">
+                    {{ form.password.label(class="form-control-label") }}
+                    {% if form.password.errors %}
+                    {{ form.password(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.password(class="form-control") }}
+                    {% endif %}
                 </div>
-            </fieldset>
-            <small class="text-muted ml2-2 text-center"><a href="#">Forgot Password?</a></small>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {%  if messages %}
-                    {% for categoria, mensagem in messages %}
-                        <div class="alert alert-{{ categoria }} mt-3">
-                            <p>{{ mensagem }}</p>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-        </form>
-    </div>
+                <div class="form-check mt-3">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                {{ form.submit(class="btn btn-outline-success") }}
+                <a href="{{ url_for('register') }}" class="btn btn-outline-primary m-2" role="button">Registrar</a>
+            </div>
+        </fieldset>
+        <small class="text-muted ml2-2 text-center"><a href="#">Forgot Password?</a></small>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for categoria, mensagem in messages %}
+        <div class="alert alert-{{ categoria }} mt-3">
+            <p>{{ mensagem }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </form>
+</div>
 {% endblock %}

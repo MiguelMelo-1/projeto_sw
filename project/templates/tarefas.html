@@ -53,7 +53,7 @@
                                 <a href="{{ url_for('task_done', task_id=task.id) }}" class="flex btn btn-success" style="margin-right: 10px;">
                                     <i class="fa-solid fa-check" style="margin-right: 5px;"></i>Concluido
                                 </a>
-                                <a href="#" class="flex btn btn-info" style="margin-right: 10px;">
+                                <a href="{{ url_for('update_task', task_id=task.id) }}" class="flex btn btn-info" style="margin-right: 10px;">
                                     <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
                                 </a>
                                 <a class="flex btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ task.id }}">

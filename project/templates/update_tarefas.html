@@ -11,32 +11,33 @@
 <!-- end navigation bar -->
 {% block content %}
     <div style="margin-left: 10%; margin-right: 10%; margin-top: 10%;">
-        <form action="{{ url_for('task') }}" class="form-control" method="post">
+        <form action="{{ url_for('update_task', task_id=tasks.id) }}" class="form-control" method="post">
+            <input type="hidden" name="idEditTaskId" value="{{ tasks.id }}">
             <fieldset>
                 <legend class="text-center pb-2 fs-1">Tarefa</legend>
                 <hr>
                 <div class="py-4">
                     <div class="input-group mb-3 p-2">
                         <span class="input-group-text">Titulo da Tarefa</span>
-                        <input type="text" class="form-control" id="idAddTaskTitle" name="idAddTaskTitle">
+                        <input type="text" class="form-control" id="idEditTaskTitle" name="idEditTaskTitle" value="{{ tasks.title }}">
                     </div>
                     <div class="input-group mb-3 p-2">
                         <span class="input-group-text">Categoria</span>
-                        <input type="text" class="form-control" id="idAddCategoria" name="idAddCategoria">
+                        <input type="text" class="form-control" id="idEditCategoria" name="idEditCategoria" value="{{ tasks.category }}">
                     </div>
                     <div class="row gx-5 p-2">
                         <div class="input-group mb-3 col">
                             <span class="input-group-text">Data de Inicio</span>
-                            <input type="date" id="idAddTaskDateStart" class="form-control" value="{{ dia.strftime('%Y-%m-%d') }}" name="idAddTaskDateStart">
+                            <input type="date" id="idEditTaskDateStart" class="form-control" value="{{ tasks.date_start }}" name="idEditTaskDateStart">
                         </div>
                         <div class="input-group mb-3 col">
                             <span class="input-group-text">Prazo Final</span>
-                            <input type="date" id="idAddTaskDateEnd" class="form-control" min="{{ dia.strftime('%Y-%m-%d') }}" name="idAddTaskDateEnd">
+                            <input type="date" id="idEditTaskDateEnd" class="form-control" min="{{ dia.strftime('%Y-%m-%d') }}" value="{{ tasks.date_end }}" name="idEditTaskDateEnd">
                         </div>
                     </div>
                     <div class="input-group p-2">
                         <span class="input-group-text">Descrição</span>
-                        <textarea id="idAddTaskDescription" class="form-control" style="resize: none;" name="idAddTaskDescription"></textarea>
+                        <textarea id="idEditTaskDescription" class="form-control" style="resize: none;" name="idEditTaskDescription">{{ tasks.desc }}</textarea>
                     </div>
                 </div>
                 <hr>
