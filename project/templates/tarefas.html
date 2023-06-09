@@ -58,9 +58,12 @@
                                 {% endif %}
                             </td>
                             <td  style="right: 0%;">
+                                {% if task.state == False %}
                                 <a href="{{ url_for('task_done', task_id=task.id) }}" class="flex btn btn-success" style="margin-right: 10px;">
                                     <i class="fa-solid fa-check" style="margin-right: 5px;"></i>Concluído
                                 </a>
+                                {%else%}
+                                {%endif%}
                                 <a href="{{ url_for('update_task', task_id=task.id) }}" class="flex btn btn-info" style="margin-right: 10px;">
                                     <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
                                 </a>
