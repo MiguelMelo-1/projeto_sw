@@ -46,7 +46,7 @@
                     {% for task in tasks %}
                         <tr>
                             <th scope="row">{{ loop.index }}</th>
-                            <td>{{ task.title }}</td>
+                            <td title="{{ task.desc }}"><u>{{ task.title }}</u></td>
                             <td>{{ task.category }}</td>
                             <td>{{ task.date_start }}</td>
                             <td>{{ task.date_end }}</td>
