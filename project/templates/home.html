@@ -11,7 +11,7 @@
 <!-- end navigation bar -->
 {% block content %}
     <div style="margin-left: 10%; margin-right: 10%; margin-top: 10%;">
-        <form action="{{ url_for('index') }}" class="form-control" method="post">
+        <form action="{{ url_for('index') }}" class="form-control" method="post" onsubmit="return validarFormulario()">
             <fieldset>
                 <legend class="text-center pb-2 fs-1">Tarefa</legend>
                 <hr>
@@ -46,10 +46,27 @@
             </fieldset>
         </form>
     </div>
+
+    <script>
+        function validarFormulario() {
+            var titulo = document.getElementById("idAddTaskTitle").value;
+            var categoria = document.getElementById("idAddCategoria").value;
+            var dataInicio = document.getElementById("idAddTaskDateStart").value;
+            var dataFim = document.getElementById("idAddTaskDateEnd").value;
+            var descricao = document.getElementById("idAddTaskDescription").value;
+    
+            if (titulo === "" || categoria === "" || dataInicio === "" || dataFim === "" || descricao === "") {
+                alert("!preencha todos os campos!");
+                return false;
+            }
+        }
+    </script>
+
 {% endblock %}
 
 {% block script %}
 <script>
+
     function onLoad(){
         document.getElementById("idNavInicio").className = "nav-link text-white active fs-5";
         document.getElementById("idNavInicio").href = "";
