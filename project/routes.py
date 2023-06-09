@@ -87,8 +87,18 @@ def remove_task(task_id):
         db.session.commit()
     return redirect(url_for('tasks'))
 
-@app.route("/update_task/<task_id>")
+@app.route("/update_task/<task_id>", methods=['GET', 'POST'])
 def update_task(task_id):
     dia = datetime.now()
-    tasks = Task.query.filter_by(id = task_id).first()
-    return render_template('update_tarefas.html', tasks = tasks, dia=dia)
+    task = Task.query.get(task_id)
+
+    if request.method == 'POST':
+        task.title = request.form['idEditTaskTitle']
+        task.category = request.form['idEditCategoria']
+        task.date_start = request.form['idEditTaskDateStart']
+        task.date_end = request.form['idEditTaskDateEnd']
+        task.desc = request.form['idEditTaskDescription']
+        db.session.commit()
+        return redirect(url_for('tasks'))
+    
+    return render_template('update_tarefas.html', tasks=task, dia=dia)
