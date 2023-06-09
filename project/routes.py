@@ -15,7 +15,6 @@ def index():
         task_date_end = request.form['idAddTaskDateEnd']
         task_categoria = request.form['idAddCategoria']
         user_id = current_user.id
-        task_state = False
 
         new_task = Task(
             title = task_title,
@@ -75,8 +74,8 @@ def tasks():
 
 @app.route("/task_done/<task_id>")
 def task_done(task_id):
-    task_done = Task.query.filter_by(id = task_id).first()
-    task_done.state = True
+    task = Task.query.get(task_id)
+    task.state = True
     db.session.commit()
     return redirect(url_for('tasks'))
 
