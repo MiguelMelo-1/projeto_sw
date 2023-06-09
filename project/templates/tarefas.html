@@ -38,6 +38,7 @@
                     <th scope="col">Categoria</th>
                     <th scope="col">Data de Inicio</th>
                     <th scope="col">Prazo final</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
@@ -49,9 +50,16 @@
                             <td>{{ task.category }}</td>
                             <td>{{ task.date_start }}</td>
                             <td>{{ task.date_end }}</td>
+                            <td>
+                                {% if task.state %}
+                                  Concluído
+                                {% else %}
+                                  Pendente
+                                {% endif %}
+                              </td>
                             <td  style="right: 0%;">
-                                <a href="{{ url_for('task_done', task_id=task.id) }}" class="flex btn btn-success" style="margin-right: 10px;">
-                                    <i class="fa-solid fa-check" style="margin-right: 5px;"></i>Concluido
+                                <a href="{{ url_for('task_done', task_id=task.id) }}" class="flex btn btn-success" style="margin-right: 10px;" onclick="atualizarEstadoTarefa({{ task.id }});">
+                                    <i class="fa-solid fa-check" style="margin-right: 5px;"></i>Concluído
                                 </a>
                                 <a href="{{ url_for('update_task', task_id=task.id) }}" class="flex btn btn-info" style="margin-right: 10px;">
                                     <i class="fa-solid fa-pen" style="margin-right: 5px;"></i>Editar
@@ -96,6 +104,23 @@
 
 {% block script %}
 <script>
+
+    function atualizarEstadoTarefa(taskId) {
+        fetch("/update_task_state/" + taskId, { method: "POST" })
+          .then(response => {
+            if (response.ok) {
+              var estadoElement = document.getElementById("estado" + taskId);
+              if (estadoElement.innerText === "Pendente") {
+                estadoElement.innerText = "Concluído";
+              } else {
+                estadoElement.innerText = "Pendente";
+              }
+            }
+          })
+          .catch(error => {
+            console.error("Erro ao atualizar o estado da tarefa:", error);
+          });
+      }
 
     function filterTable() {
         var input, filter, table, tr, td, i, txtValue;
